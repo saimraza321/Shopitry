@@ -40,6 +40,7 @@ class NewProductController extends Controller
         $newProducts->price = $request->price;
         $newProducts->category = $request->category;
         $newProducts->image = $filename;
+        $newProducts->type = 2;
         $newProducts->save();
         return redirect()->route('newproduct.index')->with('success', 'Product created successfully.');
     }

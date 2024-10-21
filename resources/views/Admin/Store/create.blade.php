@@ -17,6 +17,12 @@
                     </div>
                 </div>
    <div class="card">
+   @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
         <div class="card-body">
             <h3 class="card-title">Add Products</h3>
             <form class="form" name="formCreate" id="formCreate" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
@@ -45,6 +51,27 @@
                         <label>Image</label>
                         <input type="file" class="form-control" name="image" required>
                     </div>
+                    <div class="form-group col-6">
+                
+                <label>Image 2</label>
+                <input type="file" class="form-control" name="image2" required>
+            </div>
+            <div class="form-group col-6">
+        
+                <label>Image 3</label>
+                <input type="file" class="form-control" name="image3" required>
+            </div>
+        </div>
+            <div class="form-group col-6">
+        
+                <label>Image 4</label>
+                <input type="file" class="form-control" name="image4" required>
+            </div>
+            <div class="form-group col-6">
+        
+                <label>Type</label>
+                <input type="text" class="form-control" name="type" required>
+            </div>
                 </div>
               
                

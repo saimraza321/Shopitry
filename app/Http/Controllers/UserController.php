@@ -38,7 +38,11 @@ $data = $request->validate([
     ]);
     if (Auth::attempt($credentials)) {
       if(Auth::user()->user_type == 1){
+        if(Auth::user()->user_type == 1){
           return view('Admin.dashboard');
+          } else {
+            return redirect()->route('front.index')->with('error','You Are a User Be USer... Learn to be in Your Limits');
+          }
       } elseif(Auth::user()->user_type == 0){
         $products = NewProduct::all(); 
         $top_selling = top_selling::all();

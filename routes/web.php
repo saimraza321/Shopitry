@@ -29,9 +29,14 @@ use App\Http\Controllers\BrandController ;
 Route::get('/',function(){
     return view('Front-end.index');
 });*/
-Route::get('/admin',function(){
-    return view('Admin.dashboard')->name('admin');
-});
+Route::get('/admin', function () {
+    if(Auth::user()->user_type == 1){
+    return view('Admin.dashboard');
+}else{
+    return redirect()->route('front.index')->with('error','You Are a User not an Admin Be User... Learn to be in Your Limits');
+}
+})->name('admin');
+
 Route::get('/login',function(){
     return view('login');
 });

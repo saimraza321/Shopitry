@@ -46,6 +46,9 @@
                         <input type="file" class="form-control" name="image" required>
                     </div>
                 </div>
+                   
+                </div>
+                </div>
               
                 
                 <div class="form-group row">

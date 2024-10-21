@@ -26,6 +26,12 @@
                 <!-- ============================================================== -->
                 <!-- Info box -->
                 <!-- ============================================================== -->
+                @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
                 <div class="card-group">
                     <div class="card">
                         <div class="card-body">

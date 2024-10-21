@@ -14,7 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = products::all(); 
+        $products = products::where('type','1')->get(); 
         return view('Admin.store.index', compact('products'));
     }
 
@@ -32,19 +32,43 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $filename = null;
+       
+            // Initialize filenames
+            $filename1 = $filename2 = $filename3 = $filename4 = null;
+    
+            // Upload image1
+            $filename1 = null;
         if ($request->hasFile('image')) {
-            $filename = time(). '.'. $request->image->getClientOriginalExtension();
-            $request->image->move(public_path('images'), $filename);
+            $filename1 = time(). '.'. $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $filename1);
         }
-        $products = new products();
-        $products->name = $request->name;
-        $products->price = $request->price;
-        $products->category = $request->category;
-        $products->image = $filename;
-        $products->save();
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+    
+            // Upload image2
+            if ($request->hasFile('image2')) {
+                $filename2 = uniqid() . '.' . $request->file('image2')->getClientOriginalExtension();
+                $request->file('image2')->move(public_path('images'), $filename2);
+            }
+    
+          
+    
+            // Save product details
+            $products = new Products();
+            $products->name = $request->name;
+            $products->price = $request->price;
+            $products->category = $request->category;
+            $products->type = 1; // Assuming this is a fixed value
+    
+            // Save filenames to the database
+            $products->image = $filename1;
+            $products->image2 = $filename2;
+
+    
+            $products->save();
+    
+            return redirect()->route('products.index')->with('success', 'Product updated successfully');
+       
     }
+    
 
 
     public function edit($id)
@@ -91,7 +115,7 @@ class ProductsController extends Controller
     public function filter(Request $request) {
         $query = Products::query();
         
-        $products = Products::all(); 
+        $products = products::where('type','1')->get(); 
         $categories  =  Category::all();
         $brands = Brand::all();
     

@@ -42,6 +42,7 @@ class TopSellingController extends Controller
         $top_selling->rating = $request->rating;
         $top_selling->category = $request->category;
         $top_selling->image = $filename;
+        $top_selling->type = 3;
         $top_selling->save();
         return redirect()->route('newproduct.index')->with('success', 'Product created successfully.');
     }

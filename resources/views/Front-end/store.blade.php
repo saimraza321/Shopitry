@@ -39,7 +39,7 @@
             <div class="price-inputs">
                 <div class="input-group">
                     <span>Min Price:</span>
-                    <input type="text" id="price-min-display" class="form-control small-input" readonly>
+                    <input type="text" id="price-min-display" class="form-control small-input" >
                 </div>
                 <div class="input-group">
                     <span>Max Price:</span>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <input type="hidden" name="price_min" id="price-min" value="1">
-            <input type="hidden" name="price_max" id="price-max" value="999">
+            <input type="hidden" name="price_max" id="price-max" value="99999">
         </div>
     </div>
 
@@ -150,11 +150,11 @@
 		<script>
     var priceSlider = document.getElementById('price-slider');
     noUiSlider.create(priceSlider, {
-        start: [1, 999],
+        start: [1, 99999],
         connect: true,
         range: {
             'min': 1,
-            'max': 999
+            'max': 99999
         },
         format: {
             to: function (value) {
@@ -186,15 +186,15 @@
         });
 
         // Reset the price slider to the default values
-        priceSlider.noUiSlider.set([1, 999]);
+        priceSlider.noUiSlider.set([1, 99999]);
 
         // Reset the hidden input fields for the price range
         document.getElementById('price-min').value = 1;
-        document.getElementById('price-max').value = 999;
+        document.getElementById('price-max').value = 99999;
 
         // Reset the displayed price values
         document.getElementById('price-min-display').value = 1;
-        document.getElementById('price-max-display').value = 999;
+        document.getElementById('price-max-display').value = 99999;
 
         // Redirect to the base product listing route without query parameters
         window.location.href = "{{ route('front.products') }}";

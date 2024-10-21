@@ -44,6 +44,13 @@
                          
                             </ul>
                         </li>    
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-settings"></i><span class="hide-menu">Brands</a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{route('brand.create')}}">Create Brands </a></li>
+                                <li><a href="{{route('brand.index')}}">Brands</a></li>
+                         
+                            </ul>
+                        </li>    
 </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

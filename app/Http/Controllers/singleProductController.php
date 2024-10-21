@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\top_selling;
+use App\Models\products;
 use App\Models\AddToCart;
 use Illuminate\Http\Request;
 use DB;
@@ -14,11 +14,11 @@ class singleProductController extends Controller
         if (Auth::check()) {
           
        
-        $single_product = top_selling::find($id);
+        $single_product = products::find($id);
          // Fetching cart items
-         $cartItem = DB::table('top_selling')
-         ->join('addtocart', 'addtocart.product_id', '=', 'top_selling.id')
-         ->select('top_selling.name as title', 'top_selling.image as image', 'top_selling.price as price', 'addtocart.*')
+         $cartItem = DB::table('products')
+         ->join('addtocart', 'addtocart.product_id', '=', 'products.id')
+         ->select('products.name as title', 'products.image as image', 'products.price as price', 'addtocart.*')
          ->where('addtocart.user_id', Auth::user()->id)
          ->get();
 

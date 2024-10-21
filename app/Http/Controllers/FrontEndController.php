@@ -17,22 +17,34 @@ class FrontEndController extends Controller
     {
         if(Auth::check()){
             if(Auth::user()->user_type == 0){
-        $products = NewProduct::all(); 
-        $top_selling = top_selling::all(); 
+        $products = products::where('type','2')->get(); 
+        $top_selling = products::where('type','3')->get(); 
         return view('Front-end.index', compact('products', 'top_selling'));
     }else {
         return redirect()->route('admin')->with('error','admin cannot directly access WEB');
     }
     }else {
-        $products = NewProduct::all(); 
-        $top_selling = top_selling::all(); 
+        $products = products::where('type','2')->get(); 
+        $top_selling = products::where('type','3')->get();
         return view('Front-end.index', compact('products', 'top_selling'));
     }
 }
     public function products(){
-        $products = Products::all(); 
+        
+        if(Auth::check()){
+            if(Auth::user()->user_type == 0){
+        $products = Products::where('type','1')->get(); 
         $categories  =  Category::all();
         $brands = Brand::all();
          return view('Front-end.store',compact('products','categories', 'brands'));
-     }  
+        }else {
+            return redirect()->route('admin')->with('error','admin cannot directly access WEB');
+        }
+        }else {
+            $products = Products::where('type','1')->get(); 
+        $categories  =  Category::all();
+        $brands = Brand::all();
+         return view('Front-end.store',compact('products','categories', 'brands'));
+        }
+        }  
 }
