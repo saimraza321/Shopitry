@@ -70,7 +70,7 @@
 								<div>
 									<a href="{{route('cart')}}">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>-*-e---e-*u*-
+										<span>Your Cart</span>
 									</a>
 								</div>
 								<!-- /cart -->

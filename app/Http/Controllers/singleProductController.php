@@ -11,6 +11,9 @@ use Auth;
 class singleProductController extends Controller
 {
     public function single_product($id){
+        if (Auth::check()) {
+          
+       
         $single_product = top_selling::find($id);
          // Fetching cart items
          $cartItem = DB::table('top_selling')
@@ -30,6 +33,10 @@ class singleProductController extends Controller
 
      // Passing grand total to the view
     
-        return view ('Front-end.single_product',compact('single_product','cartItem','grandTotal','cartCount'));
+       
+     return view ('Front-end.single_product',compact('single_product','cartItem','grandTotal','cartCount'));
+    } else {
+        return redirect()->route('front.index')->with('error', 'Please Login To Buy!!!');
+    }
     }
 }

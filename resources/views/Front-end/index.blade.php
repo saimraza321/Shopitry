@@ -6,6 +6,11 @@
 		<div class="section">
 			<!-- container -->
 			<div class="container">
+			@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 				<!-- row -->
 				<div class="row">
 					<!-- shop -->

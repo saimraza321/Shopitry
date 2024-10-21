@@ -30,7 +30,7 @@ Route::get('/',function(){
     return view('Front-end.index');
 });*/
 Route::get('/admin',function(){
-    return view('Admin.dashboard');
+    return view('Admin.dashboard')->name('admin');
 });
 Route::get('/login',function(){
     return view('login');

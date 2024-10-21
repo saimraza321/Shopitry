@@ -15,28 +15,20 @@ class FrontEndController extends Controller
 {
     public function index()
     {
+        if(Auth::check()){
+            if(Auth::user()->user_type == 0){
         $products = NewProduct::all(); 
         $top_selling = top_selling::all(); 
-
-        // Fetching cart items
-        $cartItem = DB::table('top_selling')
-            ->join('addtocart', 'addtocart.product_id', '=', 'top_selling.id')
-            ->select('top_selling.name as title', 'top_selling.image as image', 'top_selling.price as price', 'addtocart.*')
-            ->where('addtocart.user_id', Auth::user()->id)
-            ->get();
-
-        // Calculating the total price
-        $grandTotal = 0;
-        foreach ($cartItem as $item) {
-            $grandTotal += $item->price * $item->quantity;
-        }
-
-        // Count of cart items
-        $cartCount = AddToCart::where('user_id', Auth::user()->id)->count();
-
-        // Passing grand total to the view
-        return view('Front-end.index', compact('products', 'top_selling', 'cartItem', 'cartCount', 'grandTotal'));
+        return view('Front-end.index', compact('products', 'top_selling'));
+    }else {
+        return redirect()->route('admin')->with('error','admin cannot directly access WEB');
     }
+    }else {
+        $products = NewProduct::all(); 
+        $top_selling = top_selling::all(); 
+        return view('Front-end.index', compact('products', 'top_selling'));
+    }
+}
     public function products(){
         $products = Products::all(); 
         $categories  =  Category::all();
