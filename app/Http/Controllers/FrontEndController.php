@@ -17,26 +17,32 @@ class FrontEndController extends Controller
     {
         $products = NewProduct::all(); 
         $top_selling = top_selling::all(); 
-
-        // Fetching cart items
-        $cartItem = DB::table('top_selling')
-            ->join('addtocart', 'addtocart.product_id', '=', 'top_selling.id')
-            ->select('top_selling.name as title', 'top_selling.image as image', 'top_selling.price as price', 'addtocart.*')
-            ->where('addtocart.user_id', Auth::user()->id)
-            ->get();
-
-        // Calculating the total price
+    
+        $cartItem = collect();  // Default empty collection
         $grandTotal = 0;
-        foreach ($cartItem as $item) {
-            $grandTotal += $item->price * $item->quantity;
+        $cartCount = 0;
+    
+        if (Auth::check()) {
+            // Fetching cart items if user is logged in
+            $cartItem = DB::table('top_selling')
+                ->join('addtocart', 'addtocart.product_id', '=', 'top_selling.id')
+                ->select('top_selling.name as title', 'top_selling.image as image', 'top_selling.price as price', 'addtocart.*')
+                ->where('addtocart.user_id', Auth::id())
+                ->get();
+    
+            // Calculating the total price
+            foreach ($cartItem as $item) {
+                $grandTotal += $item->price * $item->quantity;
+            }
+    
+            // Count of cart items
+            $cartCount = AddToCart::where('user_id', Auth::id())->count();
         }
-
-        // Count of cart items
-        $cartCount = AddToCart::where('user_id', Auth::user()->id)->count();
-
-        // Passing grand total to the view
+    
+        // Passing data to the view
         return view('Front-end.index', compact('products', 'top_selling', 'cartItem', 'cartCount', 'grandTotal'));
     }
+    
     public function products(){
         $products = Products::all(); 
         $categories  =  Category::all();
