@@ -5,21 +5,19 @@
 		<nav id="navigation">
 			<!-- container -->
 			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
+			<div class="col-md-12">
+						
+						<div class="section-nav">
+							<ul class="section-tab-nav tab-nav">
+								<li class="active"><a data-toggle="tab" href="{{route('front.index')}}">Home</a></li>
+								<li><a data-toggle="tab" href="{{route('front.products')}}">Shop</a></li>
+								@if(Auth::check())
+								<li><a data-toggle="tab" href="{{route('cart')}}">Cart</a></li>
+								@else
+								@endif
+							</ul>
+						</div>
+					</div>
 			</div>
 			<!-- /container -->
 		</nav>

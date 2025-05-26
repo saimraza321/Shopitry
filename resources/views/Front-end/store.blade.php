@@ -8,6 +8,19 @@
 		<div class="section">
 			<!-- container -->
 			<div class="container">
+            <div class="col-md-12">
+						
+                        <div class="section-nav">
+                            <ul class="section-tab-nav tab-nav">
+                                <li class="active"><a data-toggle="tab" href="{{route('front.index')}}">Home</a></li>
+                                <li><a data-toggle="tab" href="{{route('front.products')}}">Shop</a></li>
+                                @if(Auth::check())
+                                <li><a data-toggle="tab" href="{{route('cart')}}">Cart</a></li>
+                                @else
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
 				<!-- row -->
 				<div class="row">
 				<div id="aside" class="col-md-3">
